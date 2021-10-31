@@ -1,14 +1,14 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;  //IMportam fisierul pt clasa OpMode
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
+@TeleOp(name = "Test1", group = "Teste")
 
-@Autonomous(name="Test1")
-public class TeleOp extends OpMode
+public class TeleOpMain extends OpMode
 {
     DcMotor roataStanga, roataDreapta;
     DcMotor brat_1, brat_2;
@@ -32,6 +32,17 @@ public class TeleOp extends OpMode
     {
         roataStanga.setPower(Range.clip(gamepad1.left_stick_y, -1, 1));
         roataDreapta.setPower(Range.clip(gamepad1.right_stick_y, -1, 1));
+
+//        if(Range.clip(gamepad1.left_stick_x, -1, 1) <= 0)
+//        {
+//            roataStanga.setPower(Range.clip(gamepad1.right_stick_y, -1, 1) + Range.clip(gamepad1.left_stick_x, -1, 1));
+//            roataDreapta.setPower(Range.clip(gamepad1.right_stick_y, -1, 1));
+//        }
+//        else
+//            {
+//                roataStanga.setPower(Range.clip(gamepad1.right_stick_y, -1, 1));
+//                roataDreapta.setPower(Range.clip(gamepad1.right_stick_y, -1, 1) - Range.clip(gamepad1.left_stick_x, -1, 1));
+//            }
 
     }
 }
