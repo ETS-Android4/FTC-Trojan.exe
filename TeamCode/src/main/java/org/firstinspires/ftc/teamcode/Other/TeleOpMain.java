@@ -39,7 +39,7 @@ public class TeleOpMain extends OpMode
         roataStanga.setPower(Range.clip(gamepad1.left_stick_y, -1, 1));   //Gamepad 1
         roataDreapta.setPower(Range.clip(gamepad1.right_stick_y, -1, 1));
 
-        brat_1.setPower(Range.clip(gamepad2.left_stick_y, -1, 1));        //Gamepad 2
+        brat_1.setPower(Range.clip(gamepad2.left_stick_y, -.5, .5));        //Gamepad 2
 
     }
 }
