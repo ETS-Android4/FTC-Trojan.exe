@@ -29,7 +29,7 @@ public class TeleOpMain extends OpMode
 
         roataDreapta.setDirection(DcMotorSimple.Direction.FORWARD);    //Directie motoare
         roataStanga.setDirection(DcMotorSimple.Direction.REVERSE);
-        brat_1.setDirection(DcMotorSimple.Direction.REVERSE);
+        brat_1.setDirection(DcMotorSimple.Direction.FORWARD);
 
     }
 
@@ -41,7 +41,7 @@ public class TeleOpMain extends OpMode
 
         if(gamepad2.b)                                                              //Gamepad 2
         {
-            brat_1.setPower(Range.clip(gamepad2.left_stick_y, -.7, .7));
+            brat_1.setPower(Range.clip(gamepad2.left_stick_y, -.5, .5));
         }
         else
         {
