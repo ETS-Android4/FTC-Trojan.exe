@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 @Disabled
 public class TeleOp1 extends OpMode     /// eu am fost aici:))))hepa dnb
 {                                      ///salut
-
+                              ///se continua
     @Override
     public void init()
     {
