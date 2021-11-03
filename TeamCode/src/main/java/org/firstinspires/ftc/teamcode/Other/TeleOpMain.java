@@ -12,7 +12,7 @@ import com.qualcomm.robotcore.util.Range;
 public class TeleOpMain extends OpMode
 {
     DcMotor roataStanga, roataDreapta;
-    DcMotor brat_1;
+    DcMotor brat_1, peria;
     Servo  servo_1, servo_2;
 
     @Override
@@ -22,6 +22,7 @@ public class TeleOpMain extends OpMode
         roataStanga  = hardwareMap.get(DcMotor.class, "motorStanga");
         roataDreapta = hardwareMap.get(DcMotor.class, "motorDreapta");
         brat_1       = hardwareMap.get(DcMotor.class, "motor1");
+        peria        = hardwareMap.get(DcMotor.class, "peria");
 
         //Servouri
         servo_1 = hardwareMap.get(Servo.class, "servo1");
@@ -42,10 +43,27 @@ public class TeleOpMain extends OpMode
         if(gamepad2.b)                                                              //Gamepad 2
         {
             brat_1.setPower(Range.clip(gamepad2.left_stick_y, -.5, .5));
+            telemetry.addLine("Mod slow activat - brat");
+        }
+        else
+            {
+                brat_1.setPower(Range.clip(gamepad2.left_stick_y, -1, 1));
+            }
+
+        if(gamepad2.left_bumper)
+        {
+            peria.setPower(1);
         }
         else
         {
-            brat_1.setPower(Range.clip(gamepad2.left_stick_y, -1, 1));
+            if(gamepad2.right_bumper)
+            {
+                peria.setPower(-1);
+            }
         }
+            if(gamepad2.a)
+            {
+                peria.setPower(0);
+            }
     }
 }
