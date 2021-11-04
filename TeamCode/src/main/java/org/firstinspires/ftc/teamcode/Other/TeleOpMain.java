@@ -2,66 +2,50 @@ package org.firstinspires.ftc.teamcode.Other;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
+import org.firstinspires.ftc.teamcode.Hardware.HardwareM;
+
 
 @TeleOp(name = "Test1", group = "Teste")
 
 public class TeleOpMain extends OpMode
 {
-    DcMotor roataStanga, roataDreapta;
-    DcMotor brat_1, peria;
-    Servo  servo_1, servo_2;
+    HardwareM fer = new HardwareM();
     boolean apasat = false;
     boolean apasat1 = false;
 
     @Override
     public void init()
     {
-        //Motoare
-        roataStanga  = hardwareMap.get(DcMotor.class, "motorStanga");
-        roataDreapta = hardwareMap.get(DcMotor.class, "motorDreapta");
-        brat_1       = hardwareMap.get(DcMotor.class, "motor1");
-        peria        = hardwareMap.get(DcMotor.class, "peria");
-
-        //Servouri
-        servo_1 = hardwareMap.get(Servo.class, "servo1");
-        servo_2 = hardwareMap.get(Servo.class, "servo2");
-
-        roataDreapta.setDirection(DcMotorSimple.Direction.FORWARD);    //Directie motoare
-        roataStanga.setDirection(DcMotorSimple.Direction.REVERSE);
-        brat_1.setDirection(DcMotorSimple.Direction.FORWARD);
-
+        fer.init(hardwareMap);
     }
 
     @Override
     public void loop()
     {
-        roataStanga.setPower(Range.clip(gamepad1.left_stick_y, -1, 1));   //Gamepad 1
-        roataDreapta.setPower(Range.clip(gamepad1.right_stick_y, -1, 1));
+        fer.roataStanga.setPower(Range.clip(gamepad1.left_stick_y, -1, 1));   //Gamepad 1
+        fer.roataDreapta.setPower(Range.clip(gamepad1.right_stick_y, -1, 1));
 
         if(gamepad2.b)                                                              //Gamepad 2
         {
-            brat_1.setPower(Range.clip(gamepad2.left_stick_y, -.5, .5));
+            fer.brat_1.setPower(Range.clip(gamepad2.left_stick_y, -.5, .5));
             telemetry.addLine("Mod slow activat - brat");
         }
         else
             {
-                brat_1.setPower(Range.clip(gamepad2.left_stick_y, -1, 1));
+                fer.brat_1.setPower(Range.clip(gamepad2.left_stick_y, -1, 1));
             }
 
         if(gamepad2.left_bumper && !apasat)
             {
-                peria.setPower(1);
+                fer.peria.setPower(1);
                 apasat = true;
             }
             else if(!gamepad2.left_bumper) apasat = false;
 
         if(gamepad2.right_bumper && !apasat1)
             {
-                peria.setPower(-1);
+                fer.peria.setPower(-1);
                 apasat1 = true;
             }
             else if(!gamepad2.right_bumper) apasat1 = false;
