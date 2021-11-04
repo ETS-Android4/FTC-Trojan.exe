@@ -10,23 +10,23 @@ import org.firstinspires.ftc.teamcode.Hardware.HardwareM;
 
 public class TeleOpMain extends OpMode
 {
-    HardwareM fer = new HardwareM();
+    HardwareM fer = new HardwareM();    //Variabile
     boolean apasat = false;
     boolean apasat1 = false;
 
     @Override
-    public void init()
+    public void init()      //Initializare Hardware
     {
         fer.init(hardwareMap);
     }
 
     @Override
-    public void loop()
+    public void loop()      //Robot loop
     {
         fer.roataStanga.setPower(Range.clip(gamepad1.left_stick_y, -1, 1));   //Gamepad 1
         fer.roataDreapta.setPower(Range.clip(gamepad1.right_stick_y, -1, 1));
 
-        if(gamepad2.b)                                                              //Gamepad 2
+        if(gamepad2.b)                                                                  //Gamepad 2
         {
             fer.brat_1.setPower(Range.clip(gamepad2.left_stick_y, -.5, .5));
             telemetry.addLine("Mod slow activat - brat");

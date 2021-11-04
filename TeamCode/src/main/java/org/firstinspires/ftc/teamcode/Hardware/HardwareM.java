@@ -8,18 +8,18 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 public class HardwareM
 {
-    public DcMotor roataStanga = null;
+    public DcMotor roataStanga  = null;     //Motoare
     public DcMotor roataDreapta = null;
-    public DcMotor brat_1 = null;
-    public DcMotor peria = null;
+    public DcMotor brat_1       = null;
+    public DcMotor peria        = null;
 
-    public Servo servo_1 = null;
+    public Servo servo_1 = null;            //Servouri
     public Servo servo_2 = null;
 
-    HardwareMap hwMap = null;
+            HardwareMap hwMap    = null;    //Altele
     private ElapsedTime perioada = new ElapsedTime();
 
-    public HardwareM(){}
+    public HardwareM(){}                    //Constructor
 
     public void init (HardwareMap hwMap)
     {
@@ -29,26 +29,25 @@ public class HardwareM
         brat_1       = hwMap.get(DcMotor.class, "motor1");
         peria        = hwMap.get(DcMotor.class, "peria");
 
-        roataDreapta.setDirection(DcMotorSimple.Direction.FORWARD);    //Directie motoare
-        roataStanga.setDirection(DcMotorSimple.Direction.REVERSE);
-        brat_1.setDirection(DcMotorSimple.Direction.FORWARD);
-        peria.setDirection(DcMotorSimple.Direction.FORWARD);
-
-        roataDreapta.setPower(0);
-        roataStanga.setPower(0);
-        brat_1.setPower(0);
-        peria.setPower(0);
-
-        roataDreapta.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        roataStanga.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        brat_1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        peria.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
-        roataDreapta.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        roataDreapta.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);  //Power 0 behavior
         roataStanga.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         brat_1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         peria.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+        roataDreapta.setDirection(DcMotorSimple.Direction.FORWARD);          //Directie motoare
+        roataStanga.setDirection(DcMotorSimple.Direction.REVERSE);
+        brat_1.setDirection(DcMotorSimple.Direction.FORWARD);
+        peria.setDirection(DcMotorSimple.Direction.FORWARD);
+
+        roataDreapta.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);           //Encodere
+        roataStanga.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        brat_1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        peria.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        roataDreapta.setPower(0);                                            //setPower 0
+        roataStanga.setPower(0);
+        brat_1.setPower(0);
+        peria.setPower(0);
 
         //Servouri
         servo_1 = hwMap.get(Servo.class, "servo1");
