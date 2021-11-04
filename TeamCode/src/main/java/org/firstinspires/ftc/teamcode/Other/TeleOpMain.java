@@ -14,6 +14,8 @@ public class TeleOpMain extends OpMode
     DcMotor roataStanga, roataDreapta;
     DcMotor brat_1, peria;
     Servo  servo_1, servo_2;
+    boolean apasat = false;
+    boolean apasat1 = false;
 
     @Override
     public void init()
@@ -50,20 +52,21 @@ public class TeleOpMain extends OpMode
                 brat_1.setPower(Range.clip(gamepad2.left_stick_y, -1, 1));
             }
 
-        if(gamepad2.left_bumper)
-        {
-            peria.setPower(1);
-        }
-        else
-        {
-            if(gamepad2.right_bumper)
+        if(gamepad2.left_bumper && !apasat)
+            {
+                peria.setPower(1);
+                apasat = true;
+            }
+            else if(!gamepad2.left_bumper) apasat = false;
+
+        if(gamepad2.right_bumper && !apasat1)
             {
                 peria.setPower(-1);
+                apasat1 = true;
             }
-        }
-            if(gamepad2.a)
-            {
-                peria.setPower(0);
-            }
+            else if(!gamepad2.right_bumper) apasat1 = false;
+
+//        else if(gamepad2.a)
+//            peria.setPower(0);
     }
 }
