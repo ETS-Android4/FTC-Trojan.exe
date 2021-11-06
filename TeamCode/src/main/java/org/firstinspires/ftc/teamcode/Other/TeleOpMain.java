@@ -29,11 +29,14 @@ public class TeleOpMain extends OpMode
         if(gamepad2.b)                                                                  //Gamepad 2
         {
             fer.brat_1.setPower(Range.clip(gamepad2.left_stick_y, -.5, .5));
-            telemetry.addLine("Mod slow activat - brat");
+            telemetry.addData("Brat", "Slowmode activat");
+            telemetry.update();
         }
         else
             {
                 fer.brat_1.setPower(Range.clip(gamepad2.left_stick_y, -1, 1));
+                telemetry.addData("Brat", "Slowmode dezactivat");
+                telemetry.update();
             }
 
         if(gamepad2.left_bumper && !apasat)
