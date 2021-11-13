@@ -11,8 +11,6 @@ import org.firstinspires.ftc.teamcode.Hardware.HardwareM;
 public class TeleOpMain extends OpMode
 {
     HardwareM fer = new HardwareM();    //Variabile
-    boolean apasat = false;
-    boolean apasat1 = false;
 
     @Override
     public void init()      //Initializare Hardware
@@ -29,31 +27,32 @@ public class TeleOpMain extends OpMode
         if(gamepad2.b)                                                                  //Gamepad 2
         {
             fer.brat_1.setPower(Range.clip(gamepad2.left_stick_y, -.5, .5));
-            telemetry.addData("Brat", "Slowmode activat");
+            telemetry.addData("Slowmode","Activat");
             telemetry.update();
         }
         else
             {
                 fer.brat_1.setPower(Range.clip(gamepad2.left_stick_y, -1, 1));
-                telemetry.addData("Brat", "Slowmode dezactivat");
+                telemetry.addData("Slowmode","Dezactivat");
                 telemetry.update();
             }
 
-        if(gamepad2.left_bumper && !apasat)
+        if(gamepad2.left_bumper)
             {
                 fer.peria.setPower(1);
-                apasat = true;
+                telemetry.addData("Perie","Spate");
+                telemetry.update();
             }
-            else if(!gamepad2.left_bumper) apasat = false;
 
-        if(gamepad2.right_bumper && !apasat1)
+        else if(gamepad2.right_bumper)
             {
                 fer.peria.setPower(-1);
-                apasat1 = true;
+                telemetry.addData("Perie","Fata");
+                telemetry.update();
             }
-            else if(!gamepad2.right_bumper) apasat1 = false;
 
-//        else if(gamepad2.a)
-//            peria.setPower(0);
+        else if(gamepad2.a) fer.peria.setPower(0);
+        telemetry.addData("Perie","Oprita");
+        telemetry.update();
     }
 }

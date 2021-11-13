@@ -35,7 +35,7 @@ public class HardwareM
         peria.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         roataDreapta.setDirection(DcMotorSimple.Direction.FORWARD);          //Directie motoare
-        roataStanga.setDirection(DcMotorSimple.Direction.REVERSE);
+        roataStanga.setDirection(DcMotorSimple.Direction.FORWARD);
         brat_1.setDirection(DcMotorSimple.Direction.FORWARD);
         peria.setDirection(DcMotorSimple.Direction.FORWARD);
 
