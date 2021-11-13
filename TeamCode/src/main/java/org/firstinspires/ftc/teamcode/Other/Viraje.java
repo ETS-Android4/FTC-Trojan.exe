@@ -33,8 +33,8 @@ public class Viraje extends OpMode {
         double fata_spate = gamepad1.left_stick_y;
         double stanga_dreapta = gamepad1.right_stick_x;        //Range.clip?
 
-        left = fata_spate + stanga_dreapta;
-        right = fata_spate - stanga_dreapta;
+        left = fata_spate - stanga_dreapta;
+        right = fata_spate + stanga_dreapta;
 
         roataStanga.setPower(left);
         roataDreapta.setPower(right);
