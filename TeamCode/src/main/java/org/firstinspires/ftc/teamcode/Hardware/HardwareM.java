@@ -39,7 +39,7 @@ public class HardwareM
         brat_1.setDirection(DcMotorSimple.Direction.FORWARD);
         peria.setDirection(DcMotorSimple.Direction.FORWARD);
 
-        roataDreapta.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);           //Encodere
+        roataDreapta.setMode(DcMotor.RunMode.RUN_USING_ENCODER);           //Encodere
         roataStanga.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         brat_1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         peria.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
