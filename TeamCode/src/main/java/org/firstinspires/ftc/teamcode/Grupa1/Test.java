@@ -4,4 +4,5 @@ public class Test
 {
     //comment
     ///da ma
+    ///o minimala pe ger
 }
