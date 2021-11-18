@@ -16,6 +16,7 @@ public class TeleOpMain extends OpMode
     public void init()      //Initializare Hardware
     {
         fer.init(hardwareMap);
+        telemetry.addData("Robot" ,"Initializat");
     }
 
     @Override
