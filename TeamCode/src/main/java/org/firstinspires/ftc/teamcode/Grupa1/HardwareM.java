@@ -5,7 +5,6 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.hardware.DcMotor.RunMode;
 
 public class HardwareM
 {
@@ -22,36 +21,7 @@ public class HardwareM
 
     public HardwareM(){}
 
-    public boolean mode;
-
-    public void setMode( RunMode mode)
-    {
-        if (mode)
-        {
-            roataDreapta.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            roataStanga.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            brat_1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            peria.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-            roataDreapta.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            roataStanga.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            brat_1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            peria.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        }
-        else
-            {
-            roataDreapta.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-            roataStanga.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-            brat_1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-            peria.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
-
-                }
-
-    }
-
-
-    public void init (HardwareMap hwMap)
+    public void init (HardwareMap hwMap, boolean mode)
     {
         roataStanga  = hwMap.get(DcMotor.class, "motorStanga");
         roataDreapta = hwMap.get(DcMotor.class, "motorDreapta");
@@ -67,6 +37,25 @@ public class HardwareM
         roataStanga.setDirection(DcMotorSimple.Direction.FORWARD);
         brat_1.setDirection(DcMotorSimple.Direction.FORWARD);
         peria.setDirection(DcMotorSimple.Direction.FORWARD);
+
+        if (mode)
+        {
+            roataDreapta.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            roataStanga.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            brat_1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            peria.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+            roataDreapta.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            roataStanga.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            brat_1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            peria.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        }
+        else {
+            roataDreapta.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            roataStanga.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            brat_1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            peria.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        }
 
         roataDreapta.setPower(0);
         roataStanga.setPower(0);
