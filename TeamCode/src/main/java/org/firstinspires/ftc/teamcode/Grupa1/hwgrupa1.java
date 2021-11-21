@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-public class HardwareM
+public class hwgrupa1
 {
     public DcMotor roataStanga  = null;
     public DcMotor roataDreapta = null;
@@ -19,7 +19,7 @@ public class HardwareM
     HardwareMap hwMap    = null;
     private ElapsedTime perioada = new ElapsedTime();
 
-    public HardwareM(){}
+    public hwgrupa1(){}
 
     public void init (HardwareMap hwMap, boolean mode)
     {
