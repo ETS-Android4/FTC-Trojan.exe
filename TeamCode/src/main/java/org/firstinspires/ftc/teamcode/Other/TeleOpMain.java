@@ -25,6 +25,7 @@ public class TeleOpMain extends OpMode
         //Gamepad 1
         fer.roataStanga.setPower(Range.clip(gamepad1.left_stick_y, -1, 1));
         fer.roataDreapta.setPower(Range.clip(gamepad1.right_stick_y, -1, 1));
+
         if(gamepad1.right_bumper)
             {
                 fer.carusel.setPower(1);
