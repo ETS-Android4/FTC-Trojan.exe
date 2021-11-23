@@ -18,7 +18,7 @@ public class HardwareMap2 {
     HardwareMap hwMap    = null;
     private ElapsedTime perioada = new ElapsedTime();
 
-    public HardwareM(){}
+    public HardwareMap2(){}
 
     public void init (HardwareMap hwMap, boolean encoder)
     {
@@ -38,18 +38,21 @@ public class HardwareMap2 {
         brat_1.setDirection(DcMotorSimple.Direction.FORWARD);
         peria.setDirection(DcMotorSimple.Direction.FORWARD);
 
-        boolean encoder = true;
         if (encoder)
-        roataDreapta.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        roataStanga.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        brat_1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        peria.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
+        {
+            roataDreapta.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            roataStanga.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            brat_1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            peria.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        }
         else
-        roataDreapta.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        roataStanga.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        brat_1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        peria.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        {
+            roataDreapta.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            roataStanga.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            brat_1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            peria.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        }
+
 
         roataDreapta.setPower(0);
         roataStanga.setPower(0);

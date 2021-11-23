@@ -3,6 +3,8 @@ package org.firstinspires.ftc.teamcode.Other;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.util.Range;
+
+import org.firstinspires.ftc.teamcode.Grupa2.HardwareMap2;
 import org.firstinspires.ftc.teamcode.Hardware.HardwareM;
 
 
@@ -10,12 +12,12 @@ import org.firstinspires.ftc.teamcode.Hardware.HardwareM;
 
 public class TeleOpMain extends OpMode
 {
-    HardwareM fer = new HardwareM();    //Variabile
+    HardwareMap2 fer = new HardwareMap2();    //Variabile
 
     @Override
     public void init()      //Initializare Hardware
     {
-        fer.init(hardwareMap);
+        fer.init(hardwareMap, false);
     }
 
     @Override
