@@ -38,7 +38,7 @@ public class HardwareM
         carusel.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         roataDreapta.setDirection(DcMotorSimple.Direction.FORWARD);          //Directie motoare
-        roataStanga.setDirection(DcMotorSimple.Direction.FORWARD);
+        roataStanga.setDirection(DcMotorSimple.Direction.REVERSE);
         brat_1.setDirection(DcMotorSimple.Direction.FORWARD);
         peria.setDirection(DcMotorSimple.Direction.FORWARD);
         carusel.setDirection(DcMotorSimple.Direction.FORWARD);

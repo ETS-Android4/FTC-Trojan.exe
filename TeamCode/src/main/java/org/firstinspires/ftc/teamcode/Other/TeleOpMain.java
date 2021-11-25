@@ -45,27 +45,23 @@ public class TeleOpMain extends OpMode
         {
             fer.brat_1.setPower(Range.clip(gamepad2.left_stick_y, -.5, .5));
             telemetry.addData("Slowmode","Activat");
-            telemetry.update();
         }
         else
             {
                 fer.brat_1.setPower(Range.clip(gamepad2.left_stick_y, -1, 1));
                 telemetry.addData("Slowmode","Dezactivat");
-                telemetry.update();
             }
 
         if(gamepad2.left_bumper)
             {
                 fer.peria.setPower(1);
                 telemetry.addData("Perie","Spate");
-                telemetry.update();
             }
 
         else if(gamepad2.right_bumper)
             {
                 fer.peria.setPower(-1);
                 telemetry.addData("Perie","Fata");
-                telemetry.update();
             }
 
         else if(gamepad2.a)
