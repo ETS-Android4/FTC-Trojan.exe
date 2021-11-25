@@ -18,8 +18,8 @@ public class Viraje extends OpMode {
         roataStanga  = hardwareMap.get(DcMotor.class, "motorStanga");
         roataDreapta = hardwareMap.get(DcMotor.class, "motorDreapta");
 
-        roataDreapta.setDirection(DcMotorSimple.Direction.REVERSE);    //Directie motoare
-        roataStanga.setDirection(DcMotorSimple.Direction.FORWARD);
+        roataDreapta.setDirection(DcMotorSimple.Direction.FORWARD);    //Directie motoare
+        roataStanga.setDirection(DcMotorSimple.Direction.REVERSE);
 
     }
 
