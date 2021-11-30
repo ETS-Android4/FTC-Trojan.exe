@@ -10,7 +10,7 @@ public class autonoma_2 extends autonoma_1
     @Override
     public void runOpMode() throws InterruptedException
     {
-        fer.init( hwgrupa1, true);
+        fer.init( hardwareMap, true);
 
         waitForStart();
 
