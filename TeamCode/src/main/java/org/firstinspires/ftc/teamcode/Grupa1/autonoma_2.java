@@ -5,13 +5,11 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 @Autonomous(name= "autonoma_2", group= "Grupa1")
 public class autonoma_2 extends autonoma_1
 {
-    hwgrupa1 fer = new hwgrupa1();
+
 
     @Override
     public void runOpMode() throws InterruptedException
     {
-        fer.init( hardwareMap, true);
-
         waitForStart();
 
         while(opModeIsActive())

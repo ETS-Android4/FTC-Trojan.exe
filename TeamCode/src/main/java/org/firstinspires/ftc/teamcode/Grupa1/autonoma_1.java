@@ -13,11 +13,6 @@ public class autonoma_1 extends LinearOpMode
     public void runOpMode() throws InterruptedException
     {
         fer.init(hardwareMap, true);
-
-    waitForStart();
-
-    while (opModeIsActive()) { }
-
     }
     public void stopMotor()
     {
@@ -86,10 +81,10 @@ public class autonoma_1 extends LinearOpMode
         stopMotor();
     }
 
-    public void peria (double putere, int rotatii)
+    public void peria (double putere, int rotatii) //!
     {
         fer.peria.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        fer.peria.setDirection(DcMotorSimple.Direction.FORWARD);
+        fer.peria.setDirection(DcMotorSimple.Direction.FORWARD); //!
         fer.peria.setTargetPosition(rotatii);
         fer.peria.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         fer.peria.setPower(putere); ///pentru directia fata se pune cu + si pt spate cu -
