@@ -14,8 +14,6 @@ public class Autonomous1 extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         fer.init(hardwareMap, true);
 
-        waitForStart();
-        while (opModeIsActive()) {
         }
     }
 
@@ -59,8 +57,8 @@ public class Autonomous1 extends LinearOpMode {
         fer.roataDreapta.setPower(power);
     }
 
-    public void moveback(double power, long time) {
-        fer.roataStanga.setPower(-power);
-        fer.roataDreapta.setPower(-power);
-    }
+//    public void moveback(double power, long time) {
+//        fer.roataStanga.setPower(-power);
+//        fer.roataDreapta.setPower(-power);
+//    }
 }
