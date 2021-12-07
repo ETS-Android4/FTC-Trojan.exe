@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Other;
+package org.firstinspires.ftc.teamcode.TeleOpuri;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.util.Range;
 import org.firstinspires.ftc.teamcode.Hardware.HardwareM;
 
 
-@TeleOp(name = "Test1", group = "Teste")
+@TeleOp(name = "TeleOP", group = "Teste")
 
 public class TeleOpMain extends OpMode
 {
@@ -23,8 +23,17 @@ public class TeleOpMain extends OpMode
     public void loop()      //Robot loop
     {
         //Gamepad 1
-        fer.roataStanga.setPower(Range.clip(gamepad1.left_stick_y, -1, 1));
-        fer.roataDreapta.setPower(Range.clip(gamepad1.right_stick_y, -1, 1));
+        double left;
+        double right;
+
+        double fata_spate = gamepad1.left_stick_y;
+        double stanga_dreapta = gamepad1.right_stick_x;        //Range.clip?
+
+        left = fata_spate - stanga_dreapta;
+        right = fata_spate + stanga_dreapta;
+
+        fer.frontl.setPower(left);
+        fer.frontr.setPower(right);
 
         if(gamepad1.right_bumper)
             {
