@@ -13,8 +13,6 @@ public class Autonomous1 extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         fer.init(hardwareMap, true);
-
-        }
     }
 
     public void moveforward(int distanta, double putere) {
