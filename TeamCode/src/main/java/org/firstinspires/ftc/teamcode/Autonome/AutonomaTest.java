@@ -20,19 +20,19 @@ public class AutonomaTest extends LinearOpMode {
 
     public void fata(int distanta, double putere)
     {
-        fer.frontl.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        fer.frontr.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        fer.roataStanga.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        fer.roataDreapta.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        fer.frontl.setTargetPosition(distanta);
-        fer.frontr.setTargetPosition(distanta);
+        fer.roataStanga.setTargetPosition(distanta);
+        fer.roataDreapta.setTargetPosition(distanta);
 
-        fer.frontl.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        fer.frontr.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        fer.roataStanga.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        fer.roataDreapta.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        fer.frontl.setPower(putere);
-        fer.frontr.setPower(putere);
+        fer.roataStanga.setPower(putere);
+        fer.roataDreapta.setPower(putere);
 
-        while(fer.frontl.isBusy() && fer.frontr.isBusy() )
+        while(fer.roataStanga.isBusy() && fer.roataDreapta.isBusy() )
         {}
 
         stopMotor();
@@ -40,7 +40,7 @@ public class AutonomaTest extends LinearOpMode {
 
     public void stopMotor()
     {
-        fer.frontl.setPower(0);
-        fer.frontr.setPower(0);
+        fer.roataStanga.setPower(0);
+        fer.roataDreapta.setPower(0);
     }
 }

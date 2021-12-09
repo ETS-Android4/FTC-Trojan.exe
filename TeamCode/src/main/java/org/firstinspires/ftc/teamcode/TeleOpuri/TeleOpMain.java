@@ -23,44 +23,45 @@ public class TeleOpMain extends OpMode
     public void loop()      //Robot loop
     {
         //Gamepad 1
+
+        //Variabilele pentru motoarele de la roti
         double left;
         double right;
-
-        double fata_spate = gamepad1.left_stick_y;
-        double stanga_dreapta = gamepad1.right_stick_x;        //Range.clip?
+        double fata_spate = Range.clip(gamepad1.left_stick_y, -1, 1);
+        double stanga_dreapta = Range.clip(gamepad1.right_stick_x, -1, 1);
 
         left = fata_spate - stanga_dreapta;
         right = fata_spate + stanga_dreapta;
 
-        fer.frontl.setPower(left);
-        fer.frontr.setPower(right);
+        fer.roataStanga.setPower(left);
+        fer.roataDreapta.setPower(right);
 
+        //Carusel
         if(gamepad1.right_bumper)
-            {
-                fer.carusel.setPower(1);
-            }
+        {
+            fer.carusel.setPower(1);
+        }
         else if(gamepad1.left_bumper)
             {
                 fer.carusel.setPower(-1);
             }
-
-        else if(gamepad1.a)
-            {
-                fer.carusel.setPower(0);
-            }
+            else fer.carusel.setPower(0);
 
         //Gamepad 2
+
+        //Bratul
         if(gamepad2.b)
         {
             fer.brat_1.setPower(Range.clip(gamepad2.left_stick_y, -.5, .5));
             telemetry.addData("Slowmode","Activat");
         }
         else
-            {
-                fer.brat_1.setPower(Range.clip(gamepad2.left_stick_y, -1, 1));
-                telemetry.addData("Slowmode","Dezactivat");
-            }
+        {
+            fer.brat_1.setPower(Range.clip(gamepad2.left_stick_y, -1, 1));
+            telemetry.addData("Slowmode", "Dezactivat");
+        }
 
+        //Peria
         if(gamepad2.left_bumper)
             {
                 fer.peria.setPower(1);
@@ -71,12 +72,11 @@ public class TeleOpMain extends OpMode
                 fer.peria.setPower(-1);
                 telemetry.addData("Perie","Fata");
             }
-
-        else if(gamepad2.a)
-            {
-                fer.peria.setPower(0);
-                telemetry.addData("Perie","Oprita");
-            }
+            else
+                {
+                    fer.peria.setPower(0);
+                    telemetry.addData("Perie","Oprita");
+                }
         telemetry.update();
     }
 }

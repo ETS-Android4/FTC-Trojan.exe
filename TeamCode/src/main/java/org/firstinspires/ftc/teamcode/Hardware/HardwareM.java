@@ -9,8 +9,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 public class HardwareM extends LinearOpMode
 {
-    public DcMotor frontl = null;     //Motoare fata
-    public DcMotor frontr = null;
+    public DcMotor roataStanga = null;     //Motoare fata
+    public DcMotor roataDreapta = null;
     public DcMotor backl = null;     //Motoare spate
     public DcMotor backr = null;
     public DcMotor brat_1       = null;
@@ -28,22 +28,20 @@ public class HardwareM extends LinearOpMode
     public void init (HardwareMap hardwaremap, Boolean useEncoders)
     {
         //Motoare
-        frontl       = hardwaremap.get(DcMotor.class, "motorFS");
-        frontr       = hardwaremap.get(DcMotor.class, "motorFD");
-        backl        = hardwaremap.get(DcMotor.class, "motorSS");
-        backr        = hardwaremap.get(DcMotor.class, "motorSD");
+        roataStanga = hardwaremap.get(DcMotor.class, "motorFS");
+        roataDreapta = hardwaremap.get(DcMotor.class, "motorFD");
         brat_1       = hardwaremap.get(DcMotor.class, "motor1");
         peria        = hardwaremap.get(DcMotor.class, "peria");
         carusel      = hardwaremap.get(DcMotor.class, "Carusel");
 
-        set0Behaviour(frontl, frontr, backl, backr, brat_1, peria, carusel);  //set 0 Behaivior
+        set0Behaviour(roataStanga, roataDreapta, backl, backr, brat_1, peria, carusel);  //set 0 Behaivior
 
-        setDirectionF(frontr, backr, brat_1, peria, carusel);  //set Directions Forward
-        setDirectionR(frontl, backl);  //set Directions Reverse
+        setDirectionF(roataDreapta, backr, brat_1, peria, carusel);  //set Directions Forward
+        setDirectionR(roataStanga, backl);  //set Directions Reverse
 
-        setEncoders(useEncoders, frontl, frontr, backl, backr, brat_1, peria, carusel);  //set encoders
+        setEncoders(useEncoders, roataStanga, roataDreapta, backl, backr, brat_1, peria, carusel);  //set encoders
 
-        setPow0(frontl, frontr, backl, backr, brat_1, peria, carusel);    //setPower 0
+        setPow0(roataStanga, roataDreapta, backl, backr, brat_1, peria, carusel);    //setPower 0
 
         //Servouri
         servo_1 = hardwaremap.get(Servo.class, "servo1");
