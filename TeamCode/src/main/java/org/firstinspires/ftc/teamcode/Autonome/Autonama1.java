@@ -1,31 +1,33 @@
 package org.firstinspires.ftc.teamcode.Autonome;
 
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import org.firstinspires.ftc.teamcode.Hardware.HardwareM;
 
-public class Autonama1 extends AutonomaTest {
+public class Autonama1 extends LinearOpMode {
     HardwareM fer = new HardwareM();
 
     @Override
     public void runOpMode() throws InterruptedException {
-        
 
         waitForStart();
+        fer.init(hardwareMap,true);
         while (opModeIsActive())
             {
-                fata(2000, 0.5);
+                fata_spate(1, 2000);
             }
 
 
     }
-    public void fata(int distanta, double putere)
+    public void fata_spate (double putere, int rotatii)
     {
         fer.roataStanga.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         fer.roataDreapta.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        fer.roataStanga.setTargetPosition(distanta);
-        fer.roataDreapta.setTargetPosition(distanta);
+        fer.roataStanga.setTargetPosition(rotatii);
+        fer.roataDreapta.setTargetPosition(rotatii);
 
         fer.roataStanga.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         fer.roataDreapta.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -37,5 +39,78 @@ public class Autonama1 extends AutonomaTest {
         {}
 
         stopMotor();
+
+    }
+
+    public void dreapta (double putere, int rotatii)
+    {
+        fer.roataStanga.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        fer.roataDreapta.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        fer.roataStanga.setTargetPosition(rotatii);
+        fer.roataDreapta.setTargetPosition(rotatii);
+
+        fer.roataStanga.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        fer.roataDreapta.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        fer.roataStanga.setPower(putere);
+        fer.roataDreapta.setPower(-putere);
+
+        while(fer.roataStanga.isBusy() )
+        {}
+
+        stopMotor();
+    }
+
+    public void stanga (double putere, int rotatii)
+    {
+        fer.roataStanga.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        fer.roataDreapta.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        fer.roataStanga.setTargetPosition(rotatii);
+        fer.roataDreapta.setTargetPosition(rotatii);
+
+        fer.roataStanga.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        fer.roataDreapta.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        fer.roataStanga.setPower(-putere);
+        fer.roataDreapta.setPower(putere);
+
+        while(fer.roataDreapta.isBusy() )
+        {}
+
+        stopMotor();
+    }
+
+    public void peria (double putere, int rotatii)
+    {
+        fer.peria.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        fer.peria.setTargetPosition(rotatii);
+        fer.peria.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        fer.peria.setPower(putere);
+
+        while(fer.peria.isBusy() )
+        {}
+
+        stopMotor();
+    }
+
+    public void brat (double putere, int rotatii)
+    {
+        fer.brat_1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        fer.brat_1.setTargetPosition(rotatii);
+        fer.brat_1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        fer.brat_1.setPower(putere);
+
+        while(fer.brat_1.isBusy() )
+        {}
+
+        stopMotor();
+    }
+
+    public void stopMotor()
+    {
+        fer.roataStanga.setPower(0);
+        fer.roataDreapta.setPower(0);
     }
 }
