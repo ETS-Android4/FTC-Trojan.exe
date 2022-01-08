@@ -13,18 +13,18 @@ public class TeleOpMain extends OpMode
     HardwareM fer = new HardwareM();    //Variabile
 
     @Override
-    public void init()      //Initializare Hardware
+    public void init()
     {
         fer.init(hardwareMap, false);
         telemetry.addData("Robot" ,"Initializat");
     }
 
     @Override
-    public void loop()      //Robot loop
+    public void loop()
     {
         //Gamepad 1
 
-        //Variabilele pentru motoarele de la roti
+        //Variabilele motoare roti
         double left;
         double right;
         double fata_spate = Range.clip(gamepad1.left_stick_y, -1, 1);
@@ -37,15 +37,11 @@ public class TeleOpMain extends OpMode
         fer.roataDreapta.setPower(right);
 
         //Carusel
-        if(gamepad1.right_bumper)
-        {
-            fer.carusel.setPower(1);
-        }
-        else if(gamepad1.left_bumper)
-            {
-                fer.carusel.setPower(-1);
-            }
-            else fer.carusel.setPower(0);
+        if(gamepad1.right_bumper) fer.carusel.setPower(1);
+
+        else if(gamepad1.left_bumper) fer.carusel.setPower(-1);
+
+             else fer.carusel.setPower(0);
 
         //Gamepad 2
 
