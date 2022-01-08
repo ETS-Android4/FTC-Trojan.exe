@@ -4,45 +4,40 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.util.ElapsedTime;
 
 public class HardwareM extends LinearOpMode
 {
     public DcMotor roataStanga  = null;     //Motoare fata
     public DcMotor roataDreapta = null;
 
-    public DcMotor brat_1       = null;     //Motoare brat
-    public DcMotor peria        = null;
+    public DcMotor brat_S       = null;     //Motoare brat
+    public DcMotor brat_D       = null;
+    public DcMotor brat_A       = null;
+
+    public DcMotor peria        = null;     //Altele
     public DcMotor carusel      = null;
 
-    public Servo servo_1        = null;     //Servouri
-    public Servo servo_2        = null;
-
-            HardwareMap hwMap    = null;    //Altele
-    private ElapsedTime perioada = new ElapsedTime();
+//    private ElapsedTime perioada = new ElapsedTime();
 
     public void init (HardwareMap hardwaremap, Boolean useEncoders)
     {
         //Motoare
-        roataStanga  = hardwaremap.get(DcMotor.class, "motorFS");
-        roataDreapta = hardwaremap.get(DcMotor.class, "motorFD");
-        brat_1       = hardwaremap.get(DcMotor.class, "motor1");
-        peria        = hardwaremap.get(DcMotor.class, "peria");
-        carusel      = hardwaremap.get(DcMotor.class, "Carusel");
+        roataStanga  = hardwaremap.get(DcMotor.class, "motorStanga");
+        roataDreapta = hardwaremap.get(DcMotor.class, "motorDreapta");
+        brat_S       = hardwaremap.get(DcMotor.class, "motorS");
+        brat_D       = hardwaremap.get(DcMotor.class, "motorD");
+        brat_A       = hardwaremap.get(DcMotor.class, "motor3");
+        peria        = hardwaremap.get(DcMotor.class, "motorPeria");
+        carusel      = hardwaremap.get(DcMotor.class, "motorCarusel");
 
-        set0Behaviour(roataStanga, roataDreapta, brat_1, peria, carusel);  //set 0 Behaivior
+        set0Behaviour(roataStanga, roataDreapta, brat_S, brat_D, brat_A, peria, carusel);  //set 0 Behaivior
 
-        setDirectionF(roataDreapta, brat_1, peria, carusel); //set Directions Forward
-        setDirectionR(roataStanga);                          //set Directions Reverse
+        setDirectionF(roataDreapta, brat_S, brat_D, brat_A, peria, carusel);               //set Directions Forward
+        setDirectionR(roataStanga, brat_S);                                        //set Directions Reverse
 
-        setEncoders(useEncoders, roataStanga, roataDreapta, brat_1, peria, carusel);    //set encoders
+        setEncoders(useEncoders, roataStanga, roataDreapta, brat_S, brat_D, brat_A, peria, carusel);    //set encoders
 
-        setPow0(roataStanga, roataDreapta, brat_1, peria, carusel);    //setPower 0
-
-        //Servouri
-        servo_1 = hardwaremap.get(Servo.class, "servo1");
-        servo_2 = hardwaremap.get(Servo.class, "servo2");
+        setPow0(roataStanga, roataDreapta, brat_S, brat_D, brat_A, peria, carusel);    //setPower 0
     }
 
     private void setPow0(DcMotor ... motors) {
@@ -78,5 +73,5 @@ public class HardwareM extends LinearOpMode
 
     @Override
     public void runOpMode(){}
-    public HardwareM(){}                    //Constructor
+    public HardwareM(){}    //Constructor
 }

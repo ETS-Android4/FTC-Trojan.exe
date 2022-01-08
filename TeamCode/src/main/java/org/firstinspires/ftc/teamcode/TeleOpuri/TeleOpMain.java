@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.TeleOpuri;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
 import org.firstinspires.ftc.teamcode.Hardware.HardwareM;
 
@@ -29,6 +30,7 @@ public class TeleOpMain extends OpMode
         double right;
         double fata_spate = Range.clip(gamepad1.left_stick_y, -1, 1);
         double stanga_dreapta = Range.clip(gamepad1.right_stick_x, -1, 1);
+        int nr_rotiri_scripete = 0;
 
         left = fata_spate - stanga_dreapta;
         right = fata_spate + stanga_dreapta;
@@ -37,24 +39,39 @@ public class TeleOpMain extends OpMode
         fer.roataDreapta.setPower(right);
 
         //Carusel
-        if(gamepad1.right_bumper) fer.carusel.setPower(1);
+        if(gamepad1.right_bumper) fer.carusel.setPower(1);      //!Directie corespondenta cu bumperul
 
         else if(gamepad1.left_bumper) fer.carusel.setPower(-1);
 
              else fer.carusel.setPower(0);
 
-        //Gamepad 2
+        //Gamepad 2 (left_stick, right_stick, b, y, l_bumper, r_bumper)
 
-        //Bratul
+        //Brat
         if(gamepad2.b)
         {
-            fer.brat_1.setPower(Range.clip(gamepad2.left_stick_y, -.5, .5));
+            fer.brat_D.setPower(Range.clip(gamepad2.left_stick_y, -.5, .5));
+            fer.brat_S.setPower(Range.clip(gamepad2.left_stick_y, -.5, .5));
             telemetry.addData("Slowmode","Activat");
         }
         else
         {
-            fer.brat_1.setPower(Range.clip(gamepad2.left_stick_y, -1, 1));
+            fer.brat_D.setPower(Range.clip(gamepad2.left_stick_y, -.7, .7));
+            fer.brat_S.setPower(Range.clip(gamepad2.left_stick_y, -.7, .7));
             telemetry.addData("Slowmode", "Dezactivat");
+        }
+
+        //Scipete
+        fer.brat_A.setPower(Range.clip(gamepad2.right_stick_y, -1, 1));
+
+        if(gamepad2.y)
+        {
+            fer.brat_A.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            fer.brat_A.setTargetPosition(nr_rotiri_scripete);
+            fer.brat_A.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            fer.brat_A.setPower(1);
+            while(fer.brat_A.isBusy()) {}
+            fer.brat_A.setPower(0);
         }
 
         //Peria

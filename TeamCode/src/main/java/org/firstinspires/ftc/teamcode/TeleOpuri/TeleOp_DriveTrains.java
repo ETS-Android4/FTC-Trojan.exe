@@ -48,8 +48,6 @@ public class TeleOp_DriveTrains extends HardwareM
                 scaleDown = 1.0 / maxPower;
 
             roataStanga.setPower((mag2 - rotationPower) * scaleDown);
-            backl.setPower((mag1 - rotationPower) * scaleDown);
-            backr.setPower((mag2 + rotationPower) * scaleDown);
             roataDreapta.setPower((mag1 + rotationPower) * scaleDown);
         }
     }

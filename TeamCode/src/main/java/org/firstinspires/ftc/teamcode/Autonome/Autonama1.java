@@ -18,6 +18,7 @@ public class Autonama1 extends LinearOpMode {
             fata_spate(1, 2000);
         }
     }
+
     public void fata_spate (double putere, int rotatii) {
         fer.roataStanga.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         fer.roataDreapta.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -84,12 +85,16 @@ public class Autonama1 extends LinearOpMode {
     }
 
     public void brat (double putere, int rotatii) {
-        fer.brat_1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        fer.brat_1.setTargetPosition(rotatii);
-        fer.brat_1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        fer.brat_1.setPower(putere);
+        fer.brat_S.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        fer.brat_D.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        fer.brat_S.setTargetPosition(rotatii);
+        fer.brat_D.setTargetPosition(rotatii);
+        fer.brat_S.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        fer.brat_D.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        fer.brat_S.setPower(putere);
+        fer.brat_D.setPower(putere);
 
-        while(fer.brat_1.isBusy()) {}
+        while(fer.brat_S.isBusy() || fer.brat_D.isBusy()){}
 
         stopMotor();
     }
