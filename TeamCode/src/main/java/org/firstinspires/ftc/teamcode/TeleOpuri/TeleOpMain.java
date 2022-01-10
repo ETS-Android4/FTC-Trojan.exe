@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode.TeleOpuri;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
 import org.firstinspires.ftc.teamcode.Hardware.HardwareM;
 
@@ -30,7 +29,7 @@ public class TeleOpMain extends OpMode
         double right;
         double fata_spate = Range.clip(gamepad1.left_stick_y, -1, 1);
         double stanga_dreapta = Range.clip(gamepad1.right_stick_x, -1, 1);
-        int nr_rotiri_scripete = 0;
+
 
         left = fata_spate - stanga_dreapta;
         right = fata_spate + stanga_dreapta;
@@ -63,13 +62,12 @@ public class TeleOpMain extends OpMode
 
         //Scipete
         fer.brat_A.setPower(Range.clip(gamepad2.right_stick_y, -1, 1));
+        //telemetry.addData("Rotatii", );
 
         if(gamepad2.y)
         {
-            fer.brat_A.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            fer.brat_A.setTargetPosition(nr_rotiri_scripete);
-            fer.brat_A.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            fer.brat_A.setPower(1);
+            fer.goToPosition(fer.nr_rotiri_scripete, 1, fer.brat_A);
+
             while(fer.brat_A.isBusy()) {}
             fer.brat_A.setPower(0);
         }
