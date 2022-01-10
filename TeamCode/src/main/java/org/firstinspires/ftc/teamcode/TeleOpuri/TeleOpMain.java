@@ -66,7 +66,7 @@ public class TeleOpMain extends OpMode
 
         if(gamepad2.y)
         {
-            fer.goToPosition(fer.nr_rotiri_scripete, 1, fer.brat_A);
+            fer.goToPosition(fer.SCRIPETE_ROTATION, 1, fer.brat_A); // lungimea sforii
 
             while(fer.brat_A.isBusy()) {}
             fer.brat_A.setPower(0);

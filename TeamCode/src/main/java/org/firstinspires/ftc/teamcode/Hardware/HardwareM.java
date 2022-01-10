@@ -17,23 +17,34 @@ public class HardwareM extends LinearOpMode
     public DcMotor peria        = null;     //Altele
     public DcMotor carusel      = null;
 
-    public static final double circumferintaRoata    = 28.27433;
+    /**
+     * <h2>Numarul de rotatii pentru a te deplasa un inch: </h2>
+     * <b>Circumferinta</b> este distanta pe care o parcurge roata cand completeaza o rotatie. Impartim distanta pe
+     * care dorim s-o parcurgem noi la circumferinta si obtinem numarul de rotatii necesare, <b>rotatieInch</b>.<br></br>
+     * Acum, in cazul nostru, <b>rotatieInch</b> trebuie doar multiplicata cu distanta dorita, rezultand nr de rotatii.
+     */
+    public static final double circumferintaRoata    = 11.131626;   //masoara mm si alege de pe Rev
     public static final double circumferintaScripete = 9.42;
 
     public static final double rotatieInch  = 1/ circumferintaRoata;
     public static final double rotatieInchS = 1/circumferintaScripete;
 
+    /**
+     * <b>TICK_COUNTS</b> reprezinta nr de tickuri de encoder pana ca axul motorului face o rotatie si implicit nr de
+     * tickuri pana la completarea unei rotatii a rotilor.<br>
+     * Asadar, variabilele <b>TICKS_PER_INCH</b> ne vor arata nr de tickuri pentru a parcurge distanta de 1 inch. Ne
+     * mai ramane doar sa le multiplicam cu distanta dorita.
+     */
     public static final int NEVEREST40_TICK_COUNTS  = 1120;
     public static final int TETRIX_TICK_COUNTS      = 1440;
     public static final int REV_COREHEX_TICK_COUNTS = 288;
 
-    public static final int NEVEREST40_ROTATION  = (int)(rotatieInch*NEVEREST40_TICK_COUNTS);
-    public static final int TETRIX_ROTATION      = (int)(rotatieInch*TETRIX_TICK_COUNTS);
-    public static final int REV_COREHEX_ROTATION = (int)(rotatieInch*REV_COREHEX_TICK_COUNTS);
+    public static final int NEVEREST40_TICKS_PER_INCH  = (int)(rotatieInch*NEVEREST40_TICK_COUNTS);
+    public static final int TETRIX_TICKS_PER_INCH      = (int)(rotatieInch*TETRIX_TICK_COUNTS);
+    public static final int REV_COREHEX_TICKS_PER_INCH = (int)(rotatieInch*REV_COREHEX_TICK_COUNTS);
 
     public static final int SCRIPETE_ROTATION = (int)(rotatieInchS*TETRIX_TICK_COUNTS);
 
-    public int nr_rotiri_scripete = 0;
 //    private ElapsedTime perioada = new ElapsedTime();
 
     public void init (HardwareMap hardwaremap, Boolean useEncoders){
@@ -72,7 +83,7 @@ public class HardwareM extends LinearOpMode
             m.setPower(0);
     }
 
-    public void goToPosition(int r, double p, DcMotor ... motors) {
+    public void goToPosition(double p, int r, DcMotor ... motors) {
         for (DcMotor m:motors){
             m.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             m.setTargetPosition(r);

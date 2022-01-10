@@ -1,4 +1,13 @@
 package org.firstinspires.ftc.teamcode.Autonome;
 
-public class Autonoma_Rosu_Sus {
+import org.firstinspires.ftc.teamcode.Hardware.HardwareM;
+
+public class Autonoma_Rosu_Sus extends TemplateAutonoma
+{
+    HardwareM fer = new HardwareM();
+
+    @Override
+    public void runOpMode() throws InterruptedException {
+        fer.init(hardwareMap,true);
+    }
 }
