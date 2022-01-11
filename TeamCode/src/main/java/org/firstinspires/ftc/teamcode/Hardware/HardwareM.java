@@ -23,10 +23,10 @@ public class HardwareM extends LinearOpMode
      * care dorim s-o parcurgem noi la circumferinta si obtinem numarul de rotatii necesare, <b>rotatieInch</b>.<br></br>
      * Acum, in cazul nostru, <b>rotatieInch</b> trebuie doar multiplicata cu distanta dorita, rezultand nr de rotatii.
      */
-    public static final double circumferintaRoata    = 11.131626;   //masoara mm si alege de pe Rev
+    public static final double circumferintaRoata    = 11.1257;
     public static final double circumferintaScripete = 9.42;
 
-    public static final double rotatieInch  = 1/ circumferintaRoata;
+    public static final double rotatieInch  = 1/ circumferintaRoata;    //TODO: telemetry 1 foot = 12 inches
     public static final double rotatieInchS = 1/circumferintaScripete;
 
     /**
@@ -45,7 +45,7 @@ public class HardwareM extends LinearOpMode
 
     public static final int SCRIPETE_ROTATION = (int)(rotatieInchS*TETRIX_TICK_COUNTS);
 
-//    private ElapsedTime perioada = new ElapsedTime();
+//    private ElapsedTime perioada = new ElapsedTime();     //TODO: fa autonoma sa se opreasca dupa perioada de timp permisa
 
     public void init (HardwareMap hardwaremap, Boolean useEncoders){
         roataStanga  = hardwaremap.get(DcMotor.class, "motorStanga");       //Motoare

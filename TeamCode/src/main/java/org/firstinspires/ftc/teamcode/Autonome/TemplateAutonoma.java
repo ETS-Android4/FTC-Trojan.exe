@@ -30,11 +30,11 @@ public class TemplateAutonoma extends LinearOpMode {
         fer.stopMotors(fer.roataDreapta, fer.roataStanga);
     }
 
-    public void rotireDreapta (double power, int rotatii) {
+    public void rotireDreapta (double power, int rotatii) {     //TODO: metoda de rotire dreapta
 
     }
 
-    public void rotireStanga (double power, int rotatii) {
+    public void rotireStanga (double power, int rotatii) {      //TODO: metoda de rotire stanga
 
     }
 

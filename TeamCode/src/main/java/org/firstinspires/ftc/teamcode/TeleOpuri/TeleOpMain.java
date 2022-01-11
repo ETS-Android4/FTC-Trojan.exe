@@ -11,7 +11,7 @@ import org.firstinspires.ftc.teamcode.Hardware.HardwareM;
 public class TeleOpMain extends OpMode
 {
     HardwareM fer = new HardwareM();    //Variabile
-
+                                        //TODO: adauga un timer pe telemetry
     @Override
     public void init()
     {
@@ -38,7 +38,7 @@ public class TeleOpMain extends OpMode
         fer.roataDreapta.setPower(right);
 
         //Carusel
-        if(gamepad1.right_bumper) fer.carusel.setPower(1);      //!Directie corespondenta cu bumperul
+        if(gamepad1.right_bumper) fer.carusel.setPower(1);      //TODO: directie corespondenta cu bumperul
 
         else if(gamepad1.left_bumper) fer.carusel.setPower(-1);
 
@@ -66,7 +66,7 @@ public class TeleOpMain extends OpMode
 
         if(gamepad2.y)
         {
-            fer.goToPosition(fer.SCRIPETE_ROTATION, 1, fer.brat_A); // lungimea sforii
+            fer.goToPosition(fer.SCRIPETE_ROTATION, 1, fer.brat_A); //TODO: lungimea sforii
 
             while(fer.brat_A.isBusy()) {}
             fer.brat_A.setPower(0);
