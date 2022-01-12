@@ -7,7 +7,10 @@ public class TemplateAutonoma extends LinearOpMode {
     HardwareM fer = new HardwareM();
 
     @Override
-    public void runOpMode() throws InterruptedException {fer.init(hardwareMap,true);}
+    public void runOpMode() throws InterruptedException
+    {
+        fer.init(hardwareMap,true);
+    }
 
     public void fata_spate (double power, int rotatii) {
         fer.goToPosition(power, rotatii, fer.roataStanga, fer.roataDreapta);
