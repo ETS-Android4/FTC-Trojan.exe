@@ -23,11 +23,13 @@ public class HardwareM extends LinearOpMode
      * care dorim s-o parcurgem noi la circumferinta si obtinem numarul de rotatii necesare, <b>rotatieInch</b>.<br></br>
      * Acum, in cazul nostru, <b>rotatieInch</b> trebuie doar multiplicata cu distanta dorita, rezultand nr de rotatii.
      */
-    public static final double circumferintaRoata    = 10.5078844;
+    public static final double circumferintaRoata    = 11.1259934;
     public static final double circumferintaScripete = 9.42;
 
-    public static final double rotatieInch  = 1/ circumferintaRoata;    //TODO: telemetry 1 foot = 12 inches
-    public static final double rotatieInchS = 1/circumferintaScripete;
+    public static final double rotatieInch  = 1 / circumferintaRoata;    //TODO: telemetry 1 foot = 12 inches
+    public static final double rotatieInchS = 1 / circumferintaScripete;
+
+    public static final double gearRatio = 72 / 45;
 
     /**
      * <b>TICK_COUNTS</b> reprezinta nr de tickuri de encoder pana ca axul motorului face o rotatie si implicit nr de
@@ -35,13 +37,13 @@ public class HardwareM extends LinearOpMode
      * Asadar, variabilele <b>TICKS_PER_INCH</b> ne vor arata nr de tickuri pentru a parcurge distanta de 1 inch. Ne
      * mai ramane doar sa le multiplicam cu distanta dorita.
      */
-    public static final int NEVEREST40_TICK_COUNTS  = 1120;
+    public static final int HDHEX40_TICK_COUNTS     = 1120;
     public static final int TETRIX_TICK_COUNTS      = 1440;
     public static final int REV_COREHEX_TICK_COUNTS = 288;
 
-    public static final int NEVEREST40_TICKS_PER_INCH  = (int)(rotatieInch*NEVEREST40_TICK_COUNTS);
-    public static final int TETRIX_TICKS_PER_INCH      = (int)(rotatieInch*TETRIX_TICK_COUNTS);
-    public static final int REV_COREHEX_TICKS_PER_INCH = (int)(rotatieInch*REV_COREHEX_TICK_COUNTS);
+    public static final int NEVEREST40_TICKS_PER_INCH  = 161;     //(int)(rotatieInch * HDHEX40_TICK_COUNTS * gearRatio
+    public static final int TETRIX_TICKS_PER_INCH      = (int)(rotatieInch * TETRIX_TICK_COUNTS);
+    public static final int REV_COREHEX_TICKS_PER_INCH = (int)(rotatieInch * REV_COREHEX_TICK_COUNTS);
 
     public static final int SCRIPETE_ROTATION = (int)(rotatieInchS*TETRIX_TICK_COUNTS);
 
@@ -60,8 +62,8 @@ public class HardwareM extends LinearOpMode
 
         set0Behaviour(roataStanga, roataDreapta, brat_S, brat_D, brat_A, peria, carusel);               //set 0 Behaivior
 
-        setDirectionF(roataDreapta, brat_S, brat_D, brat_A, peria, carusel);                            //set Directions Forward
-        setDirectionR(roataStanga, brat_S);                                                             //set Directions Reverse
+        setDirectionF(roataStanga, brat_S, brat_D, brat_A, peria, carusel);                            //set Directions Forward
+        setDirectionR(roataDreapta, brat_S);                                                             //set Directions Reverse
 
         setEncoders(useEncoders, roataStanga, roataDreapta, brat_S, brat_D, brat_A, peria, carusel);    //set encoders
 
