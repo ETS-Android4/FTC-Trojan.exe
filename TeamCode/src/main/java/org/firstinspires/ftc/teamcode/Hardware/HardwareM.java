@@ -25,11 +25,10 @@ public class HardwareM extends LinearOpMode
      */
     public static final double circumferintaRoata    = 11.1259934;
     public static final double circumferintaScripete = 9.42;
+    public static final double gearRatioRoti = 1.6;
 
-    public static final double rotatieInch  = 1 / circumferintaRoata;    //TODO: telemetry 1 foot = 12 inches
+//    public static final double rotatieInch  = 1 / circumferintaRoata;    //TODO: telemetry 1 foot = 12 inches
     public static final double rotatieInchS = 1 / circumferintaScripete;
-
-    public static final double gearRatio = 72 / 45;
 
     /**
      * <b>TICK_COUNTS</b> reprezinta nr de tickuri de encoder pana ca axul motorului face o rotatie si implicit nr de
@@ -41,9 +40,9 @@ public class HardwareM extends LinearOpMode
     public static final int TETRIX_TICK_COUNTS      = 1440;
     public static final int REV_COREHEX_TICK_COUNTS = 288;
 
-    public static final int NEVEREST40_TICKS_PER_INCH  = 161;     //(int)(rotatieInch * HDHEX40_TICK_COUNTS * gearRatio
-    public static final int TETRIX_TICKS_PER_INCH      = (int)(rotatieInch * TETRIX_TICK_COUNTS);
-    public static final int REV_COREHEX_TICKS_PER_INCH = (int)(rotatieInch * REV_COREHEX_TICK_COUNTS);
+    public static final int NEVEREST40_TICKS_PER_INCH  = (int)((HDHEX40_TICK_COUNTS * gearRatioRoti)/circumferintaRoata);
+    public static final int TETRIX_TICKS_PER_INCH      = (int)((TETRIX_TICK_COUNTS)/circumferintaRoata);
+    public static final int REV_COREHEX_TICKS_PER_INCH = (int)((REV_COREHEX_TICK_COUNTS)/circumferintaRoata);
 
     public static final int SCRIPETE_ROTATION = (int)(rotatieInchS*TETRIX_TICK_COUNTS);
 
@@ -57,8 +56,6 @@ public class HardwareM extends LinearOpMode
         brat_A       = hardwaremap.get(DcMotor.class, "motor3");
         peria        = hardwaremap.get(DcMotor.class, "motorPeria");
         carusel      = hardwaremap.get(DcMotor.class, "motorCarusel");
-
-            //Servouri
 
         set0Behaviour(roataStanga, roataDreapta, brat_S, brat_D, brat_A, peria, carusel);               //set 0 Behaivior
 
@@ -85,7 +82,7 @@ public class HardwareM extends LinearOpMode
             m.setPower(0);
     }
 
-    public void goToPosition(double p, int r, DcMotor ... motors) {
+    public void goToPosition(double p, int r, DcMotor ... motors) {  //TODO: Drive by encoder pushbot
         for (DcMotor m:motors){
             m.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             m.setTargetPosition(r);
@@ -94,7 +91,7 @@ public class HardwareM extends LinearOpMode
         }
     }
 
-    private void setEncoders(Boolean use, DcMotor ... motors) {
+    private void setEncoders(Boolean use, DcMotor ... motors) {     //TODO: setMotorMode(DcMotor.RunMode mode)
         if (use) {
             for (DcMotor m:motors) {
                 m.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);  //Cu Encodere
