@@ -13,7 +13,7 @@ public class Autonoma_Rosu_Sus extends TemplateAutonoma
     @Override
     public void runOpMode() throws InterruptedException
     {
-        fer.init(hardwareMap, false);
+        fer.init(hardwareMap);
         telemetry.addData("Robot", "Iitializat");
         telemetry.update();
 

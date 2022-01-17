@@ -9,7 +9,7 @@ public class TemplateAutonoma extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException
     {
-        fer.init(hardwareMap,true);
+        fer.init(hardwareMap);
     }
 
     public void fata_spate (double power, int rotatii) {

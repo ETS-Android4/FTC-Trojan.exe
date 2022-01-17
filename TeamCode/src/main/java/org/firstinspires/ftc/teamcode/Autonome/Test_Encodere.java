@@ -16,7 +16,7 @@ public class Test_Encodere extends LinearOpMode
         waitForStart();
         while(opModeIsActive())
         {
-            fer.init(hardwareMap, false);
+            fer.init(hardwareMap);
             fer.roataStanga.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             fer.roataDreapta.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 

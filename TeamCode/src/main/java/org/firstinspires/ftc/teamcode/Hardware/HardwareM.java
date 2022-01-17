@@ -4,6 +4,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.Range;
 
 public class HardwareM extends LinearOpMode
 {
@@ -17,38 +19,28 @@ public class HardwareM extends LinearOpMode
     public DcMotor peria        = null;     //Altele
     public DcMotor carusel      = null;
 
-    /**
-     * <h2>Numarul de rotatii pentru a te deplasa un inch: </h2>
-     * <b>Circumferinta</b> este distanta pe care o parcurge roata cand completeaza o rotatie. Impartim distanta pe
-     * care dorim s-o parcurgem noi la circumferinta si obtinem numarul de rotatii necesare, <b>rotatieInch</b>.<br></br>
-     * Acum, in cazul nostru, <b>rotatieInch</b> trebuie doar multiplicata cu distanta dorita, rezultand nr de rotatii.
-     */
-    public static final double circumferintaRoata    = 11.1259934;
-    public static final double circumferintaScripete = 9.42;
-    public static final double gearRatioRoti = 1.6;
+    public Servo leftClaw  = null;          //Servouri
+    public Servo rightClaw = null;
+    public Servo servoBrat = null;
 
-//    public static final double rotatieInch  = 1 / circumferintaRoata;    //TODO: telemetry 1 foot = 12 inches
-    public static final double rotatieInchS = 1 / circumferintaScripete;
-
-    /**
-     * <b>TICK_COUNTS</b> reprezinta nr de tickuri de encoder pana ca axul motorului face o rotatie si implicit nr de
-     * tickuri pana la completarea unei rotatii a rotilor.<br>
-     * Asadar, variabilele <b>TICKS_PER_INCH</b> ne vor arata nr de tickuri pentru a parcurge distanta de 1 inch. Ne
-     * mai ramane doar sa le multiplicam cu distanta dorita.
-     */
-    public static final int HDHEX40_TICK_COUNTS     = 1120;
+    public static final int HDHEX40_TICK_COUNTS     = 1120;         //TODO: fa un Enum pt tick counts, roti, etc.
     public static final int TETRIX_TICK_COUNTS      = 1440;
     public static final int REV_COREHEX_TICK_COUNTS = 288;
 
-    public static final int NEVEREST40_TICKS_PER_INCH  = (int)((HDHEX40_TICK_COUNTS * gearRatioRoti)/circumferintaRoata);
+    public static final double circumferintaRoata    = 11.131308365;
+    public static final double circumferintaScripete = 4.328829925;
+
+    public static final double driveGearRatio = 1.6;
+
+    public static final int NEVEREST40_TICKS_PER_INCH  = (int)((HDHEX40_TICK_COUNTS * driveGearRatio)/circumferintaRoata);
     public static final int TETRIX_TICKS_PER_INCH      = (int)((TETRIX_TICK_COUNTS)/circumferintaRoata);
     public static final int REV_COREHEX_TICKS_PER_INCH = (int)((REV_COREHEX_TICK_COUNTS)/circumferintaRoata);
 
-    public static final int SCRIPETE_ROTATION = (int)(rotatieInchS*TETRIX_TICK_COUNTS);
+    public static final int SCRIPETE_ROTATION = (int)(TETRIX_TICK_COUNTS/circumferintaScripete);
 
 //    private ElapsedTime perioada = new ElapsedTime();     //TODO: fa autonoma sa se opreasca dupa perioada de timp permisa
 
-    public void init (HardwareMap hardwaremap, Boolean useEncoders){
+    public void init (HardwareMap hardwaremap){
         roataStanga  = hardwaremap.get(DcMotor.class, "motorStanga");       //Motoare
         roataDreapta = hardwaremap.get(DcMotor.class, "motorDreapta");
         brat_S       = hardwaremap.get(DcMotor.class, "motorS");
@@ -57,14 +49,25 @@ public class HardwareM extends LinearOpMode
         peria        = hardwaremap.get(DcMotor.class, "motorPeria");
         carusel      = hardwaremap.get(DcMotor.class, "motorCarusel");
 
-        set0Behaviour(roataStanga, roataDreapta, brat_S, brat_D, brat_A, peria, carusel);               //set 0 Behaivior
+        leftClaw  = hardwaremap.get(Servo.class, "clawStanga");
+        rightClaw = hardwaremap.get(Servo.class, "clawDreapta");
+        servoBrat = hardwaremap.get(Servo.class, "servoBrat");
 
-        setDirectionF(roataStanga, brat_S, brat_D, brat_A, peria, carusel);                            //set Directions Forward
-        setDirectionR(roataDreapta, brat_S);                                                             //set Directions Reverse
-
-        setEncoders(useEncoders, roataStanga, roataDreapta, brat_S, brat_D, brat_A, peria, carusel);    //set encoders
-
+        set0Behaviour(DcMotor.ZeroPowerBehavior.BRAKE, roataStanga, roataDreapta, brat_S, brat_D, brat_A, peria, carusel);               //set 0 Behaivior
+        setDirections(DcMotor.Direction.FORWARD, roataStanga, brat_S, brat_D, brat_A, peria, carusel);                            //set Directions Forward
+        setDirections(DcMotor.Direction.REVERSE, roataDreapta, brat_S);                                                             //set Directions Reverse
+        setEncoderMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER, roataStanga, roataDreapta, brat_S, brat_D, brat_A, peria, carusel);    //set encoders
         stopMotors();   //setPower 0
+
+        servoReset();
+        setDirections(Servo.Direction.FORWARD, leftClaw, servoBrat);
+        setDirections(Servo.Direction.REVERSE, rightClaw);
+    }
+
+    private void servoReset() {
+        leftClaw.setPosition(0);
+        rightClaw.setPosition(0);
+        servoBrat.setPosition(0);
     }
 
     public void stopMotors() {
@@ -91,30 +94,24 @@ public class HardwareM extends LinearOpMode
         }
     }
 
-    private void setEncoders(Boolean use, DcMotor ... motors) {     //TODO: setMotorMode(DcMotor.RunMode mode)
-        if (use) {
-            for (DcMotor m:motors) {
-                m.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);  //Cu Encodere
-                m.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            }
-        }
-        else for (DcMotor m:motors)
-                 m.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);    //Fara Encodere
+    private void setEncoderMode(DcMotor.RunMode mode, DcMotor ... motors) {
+        for (DcMotor m:motors)
+            m.setMode(mode);
     }
 
-    private void set0Behaviour(DcMotor ... motors) {
+    private void set0Behaviour(DcMotor.ZeroPowerBehavior mode, DcMotor ... motors) {            //TODO: DcMotor.Zero...
         for (DcMotor m:motors)
-            m.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            m.setZeroPowerBehavior(mode);
     }
 
-    private void setDirectionF(DcMotor ... motors) {
-        for (DcMotor m:motors)
-            m.setDirection(DcMotorSimple.Direction.FORWARD);
+    private void setDirections(Servo.Direction d, Servo ... servos) {
+        for (Servo s:servos)
+            s.setDirection(d);
     }
 
-    private void setDirectionR(DcMotor ... motors) {
+    private void setDirections(DcMotor.Direction d,DcMotor ... motors) {
         for (DcMotor m:motors)
-            m.setDirection(DcMotorSimple.Direction.REVERSE);
+            m.setDirection(d);
     }
 
     @Override

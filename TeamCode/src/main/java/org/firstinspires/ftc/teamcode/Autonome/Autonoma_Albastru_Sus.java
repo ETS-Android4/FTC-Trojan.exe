@@ -8,6 +8,6 @@ public class Autonoma_Albastru_Sus extends TemplateAutonoma
 
     @Override
     public void runOpMode() throws InterruptedException {
-        fer.init(hardwareMap,true);
+        fer.init(hardwareMap);
     }
 }

@@ -1,9 +1,11 @@
 package org.firstinspires.ftc.teamcode.TeleOpuri;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.Hardware.HardwareM;
 
 @TeleOp(name = "Teleop_DriveTrains", group = "Teste")
+@Disabled
 public class TeleOp_DriveTrains extends HardwareM
 {
     @Override
@@ -23,7 +25,7 @@ public class TeleOp_DriveTrains extends HardwareM
         telemetry.addData("Status: ", "Hit [Init] to Initialize ze bot");    //
         telemetry.update();
 
-        init(hardwareMap, false);
+        init(hardwareMap);
 
         telemetry.addData("Status: ", "Hit [PLAY] to start!");
         telemetry.update();
