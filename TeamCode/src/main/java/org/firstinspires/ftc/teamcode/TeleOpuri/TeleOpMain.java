@@ -24,11 +24,10 @@ public class TeleOpMain extends OpMode
     {
         //Gamepad 1 //TODO: controale
 
-        //Variabilele motoare roti
-        double left;
-        double right;
         double fata_spate = Range.clip(gamepad1.left_stick_y, -1, 1);
         double stanga_dreapta = Range.clip(gamepad1.right_stick_x, -1, 1);
+        double left;
+        double right;
 
         left = fata_spate - stanga_dreapta;
         right = fata_spate + stanga_dreapta;
@@ -38,31 +37,24 @@ public class TeleOpMain extends OpMode
 
         //Carusel
         if(gamepad1.right_bumper) fer.carusel.setPower(1);      //TODO: directie corespondenta cu bumperul
-
         else if(gamepad1.left_bumper) fer.carusel.setPower(-1);
-
              else fer.carusel.setPower(0);
 
-        //Gamepad 2 left_stick - brat sus jos, right_stick - brat extindere,
-        //          b - slowmode brat, y - ,
-        //          l_bumper - perie, r_bumper - perie
+        //Gamepad 2
 
         //Brat
         if(gamepad2.b) {
             fer.brat_D.setPower(Range.clip(gamepad2.left_stick_y, -.5, .5));
             fer.brat_S.setPower(Range.clip(gamepad2.left_stick_y, -.5, .5));
-            telemetry.addData("Slowmode","Activat");
+            telemetry.addData("Slowmode", "Activat");
         }
-        else {
             fer.brat_D.setPower(Range.clip(gamepad2.left_stick_y, -.7, .7));
             fer.brat_S.setPower(Range.clip(gamepad2.left_stick_y, -.7, .7));
+            fer.brat_A.setPower(Range.clip(gamepad2.right_stick_y, -1, 1));
             telemetry.addData("Slowmode", "Dezactivat");
-        }
+
         if(gamepad2.a) fer.servoBrat.setPosition(.5);
         else fer.servoBrat.setPosition(0);
-
-        //Scipete
-        fer.brat_A.setPower(Range.clip(gamepad2.right_stick_y, -1, 1));
 
         //Clesti
         if(gamepad2.x){
