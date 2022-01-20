@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.TeleOpuri;
+package org.firstinspires.ftc.teamcode.TeleOpuri.Altele;
 
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-@TeleOp (name = "Viraje", group = "Teste")
+@TeleOp (name = "Viraje", group = "Other")
 @Disabled
 
 public class Viraje extends OpMode {

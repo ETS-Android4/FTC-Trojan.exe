@@ -9,14 +9,11 @@ import com.qualcomm.robotcore.util.Range;
 
 public class HardwareM extends LinearOpMode
 {
-    public DcMotor roataStanga  = null;     //Motoare fata
-    public DcMotor roataDreapta = null;
+    public DcMotor roataStanga = null, roataDreapta = null;     //Motoare fata
 
-    public DcMotor brat_S       = null;     //Motoare brat
-    public DcMotor brat_D       = null;
-    public DcMotor brat_A       = null;
+    public DcMotor brat_S = null, brat_D = null, brat_A = null;   //Motoare brat
 
-    public DcMotor peria        = null;     //Altele
+    public DcMotor peria        = null;     //Altele //TODO:multi line ..
     public DcMotor carusel      = null;
 
     public Servo leftClaw  = null;          //Servouri
@@ -29,14 +26,12 @@ public class HardwareM extends LinearOpMode
 
     public static final double circumferintaRoata    = 11.131308365;
     public static final double circumferintaScripete = 4.328829925;
-
-    public static final double driveGearRatio = 1.6;
+    public static final double driveGearRatio        = 1.6;
 
     public static final int NEVEREST40_TICKS_PER_INCH  = (int)((HDHEX40_TICK_COUNTS * driveGearRatio)/circumferintaRoata);
     public static final int TETRIX_TICKS_PER_INCH      = (int)((TETRIX_TICK_COUNTS)/circumferintaRoata);
     public static final int REV_COREHEX_TICKS_PER_INCH = (int)((REV_COREHEX_TICK_COUNTS)/circumferintaRoata);
-
-    public static final int SCRIPETE_ROTATION = (int)(TETRIX_TICK_COUNTS/circumferintaScripete);
+    public static final int SCRIPETE_TICKS_PER_INCH    = (int)(TETRIX_TICK_COUNTS/circumferintaScripete);
 
 //    private ElapsedTime perioada = new ElapsedTime();     //TODO: fa autonoma sa se opreasca dupa perioada de timp permisa
 
@@ -99,7 +94,7 @@ public class HardwareM extends LinearOpMode
             m.setMode(mode);
     }
 
-    private void set0Behaviour(DcMotor.ZeroPowerBehavior mode, DcMotor ... motors) {            //TODO: DcMotor.Zero...
+    private void set0Behaviour(DcMotor.ZeroPowerBehavior mode, DcMotor ... motors) {
         for (DcMotor m:motors)
             m.setZeroPowerBehavior(mode);
     }

@@ -1,10 +1,10 @@
-package org.firstinspires.ftc.teamcode.TeleOpuri;
+package org.firstinspires.ftc.teamcode.TeleOpuri.Altele;
 
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.Hardware.HardwareM;
 
-@TeleOp(name = "Teleop_DriveTrains", group = "Teste")
+@TeleOp(name = "Teleop_DriveTrains", group = "Other")
 @Disabled
 public class TeleOp_DriveTrains extends HardwareM
 {

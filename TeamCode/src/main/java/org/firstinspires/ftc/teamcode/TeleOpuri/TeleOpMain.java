@@ -5,24 +5,22 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.util.Range;
 import org.firstinspires.ftc.teamcode.Hardware.HardwareM;
 
-
 @TeleOp(name = "TeleOP", group = "Teste")
-
 public class TeleOpMain extends OpMode
-{
-    HardwareM fer = new HardwareM();    //Variabile
+{   HardwareM fer = new HardwareM();    //Variabile
                                         //TODO: adauga un timer pe telemetry
     @Override
-    public void init()
-    {
+    public void init() {
         fer.init(hardwareMap);
         telemetry.addData("Robot" ,"Initializat");
     }
 
     @Override
-    public void loop()
-    {
-        //Gamepad 1 //TODO: controale
+    public void loop() {
+        /**
+         ** <h3>Gamepad 1</h3>
+         **/
+        //TODO: controale
 
         double fata_spate = Range.clip(gamepad1.left_stick_y, -1, 1);
         double stanga_dreapta = Range.clip(gamepad1.right_stick_x, -1, 1);
@@ -56,17 +54,6 @@ public class TeleOpMain extends OpMode
         if(gamepad2.a) fer.servoBrat.setPosition(.5);
         else fer.servoBrat.setPosition(0);
 
-        //Clesti
-        if(gamepad2.x){
-            fer.leftClaw.setPosition(1);
-            fer.rightClaw.setPosition(-1);
-        }
-        else{
-            fer.leftClaw.setPosition(0);
-            fer.rightClaw.setPosition(0);
-        }
-
-
 //        if(gamepad2.y) {
 //            fer.goToPosition(fer.SCRIPETE_ROTATION, 1, fer.brat_A); //TODO: lungimea sforii
 //
@@ -74,19 +61,20 @@ public class TeleOpMain extends OpMode
 //            fer.brat_A.setPower(0);
 //        }
 
-//        //Peria
-//        if(gamepad2.left_bumper) {
-//                fer.peria.setPower(1);
-//                telemetry.addData("Perie","Spate");
-//            }
-//        else if(gamepad2.right_bumper) {
-//                fer.peria.setPower(-1);
-//                telemetry.addData("Perie","Fata");
-//            }
-//            else {
-//                fer.peria.setPower(0);
-//                telemetry.addData("Perie","Oprita");
-//                }
+        //Peria
+        if(gamepad2.left_bumper) {
+                fer.peria.setPower(1);
+                telemetry.addData("Perie","Spate");
+            }
+        else if(gamepad2.right_bumper) {
+                fer.peria.setPower(-1);
+                telemetry.addData("Perie","Fata");
+            }
+            else {
+                fer.peria.setPower(0);
+                telemetry.addData("Perie","Oprita");
+                }
+
         telemetry.update();
     }
 }
