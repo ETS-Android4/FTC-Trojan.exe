@@ -50,7 +50,7 @@ public class TeleOp_Cleste extends OpMode{
             }
             fer.brat_D.setPower(Range.clip(gamepad2.left_stick_y, -.7, .7));
             fer.brat_S.setPower(Range.clip(gamepad2.left_stick_y, -.7, .7));
-            fer.brat_A.setPower(Range.clip(gamepad2.right_stick_y, -1, 1));
+            fer.brat_Scripete.setPower(Range.clip(gamepad2.right_stick_y, -1, 1));
             telemetry.addData("Slowmode", "Dezactivat");
 
             if(gamepad2.a) fer.servoBrat.setPosition(.5);

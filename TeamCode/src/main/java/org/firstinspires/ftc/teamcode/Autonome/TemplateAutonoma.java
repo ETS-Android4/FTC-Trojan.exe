@@ -7,58 +7,56 @@ public class TemplateAutonoma extends LinearOpMode {
     HardwareM fer = new HardwareM();
 
     @Override
-    public void runOpMode() throws InterruptedException
-    {
+    public void runOpMode() throws InterruptedException {
         fer.init(hardwareMap);
     }
 
-    public void fata_spate (double power, int rotatii) {
+    public void drive (double power, int rotatii) {
         fer.goToPosition(power, rotatii, fer.roataStanga, fer.roataDreapta);
 
-        while(fer.roataStanga.isBusy() || fer.roataDreapta.isBusy()) {}
+        while(opModeIsActive() && (fer.roataStanga.isBusy() || fer.roataDreapta.isBusy())) {}
         fer.stopMotors(fer.roataDreapta, fer.roataStanga);
     }
 
-    public void virajDreapta (double power, int rotatii) {
-        fer.goToPosition(power, rotatii, fer.roataStanga, fer.roataDreapta);
+    public void turn (double power, int rotatiiStanga, int rotatiiDreapta) {
+        fer.goToPosition(power, rotatiiStanga, rotatiiDreapta, fer.roataStanga, fer.roataDreapta);
 
-        while(fer.roataStanga.isBusy() || fer.roataDreapta.isBusy()) {}
+        while(opModeIsActive() && (fer.roataStanga.isBusy() || fer.roataDreapta.isBusy())) {}
         fer.stopMotors(fer.roataDreapta, fer.roataStanga);
     }
 
-    public void virajStanga (double power, int rotatii) {
-        fer.goToPosition(power, rotatii, fer.roataStanga, fer.roataDreapta);
+    public void rotationR (double power, int rotatii) {
+        fer.goToPosition(power, rotatii, fer.roataStanga);
 
-        while(fer.roataDreapta.isBusy()) {}
-        fer.stopMotors(fer.roataDreapta, fer.roataStanga);
+        while(opModeIsActive() && fer.roataStanga.isBusy()){};
+        fer.stopMotors(fer.roataStanga);
     }
 
-    public void rotireDreapta (double power, int rotatii) {     //TODO: metoda de rotire dreapta
+    public void rotationS (double power, int rotatii) {
+        fer.goToPosition(power, rotatii, fer.roataDreapta);
 
-    }
-
-    public void rotireStanga (double power, int rotatii) {      //TODO: metoda de rotire stanga
-
+        while(opModeIsActive() && fer.roataDreapta.isBusy()){};
+        fer.stopMotors(fer.roataDreapta);
     }
 
     public void brat (double power, int rotatii) {
         fer.goToPosition(power, rotatii, fer.brat_S, fer.brat_D);
 
-        while(fer.brat_S.isBusy() || fer.brat_D.isBusy()){}
+        while(opModeIsActive() && (fer.brat_S.isBusy() || fer.brat_D.isBusy())){}
         fer.stopMotors(fer.brat_S, fer.brat_D);
     }
 
     public void scripete (double power, int rotatii) {
         fer.goToPosition(power, rotatii, fer.brat_S, fer.brat_D);
 
-        while(fer.brat_S.isBusy() || fer.brat_D.isBusy()){}
+        while(opModeIsActive() && (fer.brat_S.isBusy() || fer.brat_D.isBusy())){}
         fer.stopMotors(fer.brat_S, fer.brat_D);
     }
 
     public void peria (double power, int rotatii) {
         fer.goToPosition(power, rotatii, fer.peria);
 
-        while(fer.peria.isBusy()) {}
+        while(opModeIsActive() && fer.peria.isBusy()) {}
         fer.stopMotors(fer.peria);
     }
 }

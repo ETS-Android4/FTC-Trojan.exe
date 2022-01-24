@@ -2,41 +2,53 @@ package org.firstinspires.ftc.teamcode.TeleOpuri;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 import org.firstinspires.ftc.teamcode.Hardware.HardwareM;
 
 @TeleOp(name = "TeleOP", group = "Teste")
 public class TeleOpMain extends OpMode
 {   HardwareM fer = new HardwareM();    //Variabile
+    private ElapsedTime runtime = new ElapsedTime();
                                         //TODO: adauga un timer pe telemetry
     @Override
     public void init() {
         fer.init(hardwareMap);
         telemetry.addData("Robot" ,"Initializat");
     }
+    @Override
+    public void start(){runtime.reset();}
 
+    /**
+     * <h3>Gamepad 1</h3>
+     * <ul><li>left_stick_y - fata spate</li>
+     *     <li>right_stick_x - stanga dreapta</li>
+     *     <li>right_bumper - motor carusel</li></ul>
+     * <h3>Gamepad 2</h3>
+     * <ul><li></li>
+     *     <li></li>
+     *     <li></li></ul>
+     */
+    // TODO: controale
     @Override
     public void loop() {
-        /**
-         ** <h3>Gamepad 1</h3>
-         **/
-        //TODO: controale
-
-        double fata_spate = Range.clip(gamepad1.left_stick_y, -1, 1);
-        double stanga_dreapta = Range.clip(gamepad1.right_stick_x, -1, 1);
+        double fata_spate = gamepad1.left_stick_y;
+        double stanga_dreapta = gamepad1.right_stick_x;
         double left;
         double right;
+        double servo_off = .5;
+        double servo_on = 0;
 
-        left = fata_spate - stanga_dreapta;
-        right = fata_spate + stanga_dreapta;
+
+        left = Range.clip(fata_spate - stanga_dreapta,-1,1);
+        right = Range.clip(fata_spate + stanga_dreapta,-1,1 );
 
         fer.roataStanga.setPower(left);
         fer.roataDreapta.setPower(right);
 
         //Carusel
-        if(gamepad1.right_bumper) fer.carusel.setPower(1);      //TODO: directie corespondenta cu bumperul
-        else if(gamepad1.left_bumper) fer.carusel.setPower(-1);
-             else fer.carusel.setPower(0);
+        if(gamepad1.right_bumper) fer.carusel.setPower(1);
+            fer.carusel.setPower(0);
 
         //Gamepad 2
 
@@ -48,18 +60,11 @@ public class TeleOpMain extends OpMode
         }
             fer.brat_D.setPower(Range.clip(gamepad2.left_stick_y, -.7, .7));
             fer.brat_S.setPower(Range.clip(gamepad2.left_stick_y, -.7, .7));
-            fer.brat_A.setPower(Range.clip(gamepad2.right_stick_y, -1, 1));
+            fer.brat_Scripete.setPower(Range.clip(gamepad2.right_stick_y, -1, 1));
             telemetry.addData("Slowmode", "Dezactivat");
 
-        if(gamepad2.a) fer.servoBrat.setPosition(.5);
-        else fer.servoBrat.setPosition(0);
-
-//        if(gamepad2.y) {
-//            fer.goToPosition(fer.SCRIPETE_ROTATION, 1, fer.brat_A); //TODO: lungimea sforii
-//
-//            while(fer.brat_A.isBusy()) {}
-//            fer.brat_A.setPower(0);
-//        }
+        if(gamepad2.a) fer.servoBrat.setPosition(servo_on);
+            fer.servoBrat.setPosition(servo_off);
 
         //Peria
         if(gamepad2.left_bumper) {
@@ -70,11 +75,10 @@ public class TeleOpMain extends OpMode
                 fer.peria.setPower(-1);
                 telemetry.addData("Perie","Fata");
             }
-            else {
-                fer.peria.setPower(0);
-                telemetry.addData("Perie","Oprita");
-                }
+        fer.peria.setPower(0);
+        telemetry.addData("Perie","Oprita");
 
+        telemetry.addData("Status", "Run Time: " + runtime.toString());
         telemetry.update();
     }
 }
